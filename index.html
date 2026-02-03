@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>해커스 폐교재 수거 대항전</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Pretendard", sans-serif;
+    background: #f4f9f4;
+    text-align: center;
+  }
+  h1 {
+    margin: 20px 0 5px;
+  }
+  p {
+    margin-bottom: 20px;
+    color: #555;
+  }
+  .map-container {
+    position: relative;
+    width: 900px;
+    margin: 0 auto 40px;
+  }
+  svg {
+    width: 100%;
+  }
+
+  .branch {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .branch:hover {
+    transform: scale(1.1);
+  }
+
+  .label {
+    font-size: 13px;
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;
+  }
+
+  .amount {
+    font-size: 12px;
+    fill: #2e7d32;
+    text-anchor: middle;
+  }
+
+  .crown {
+    font-size: 24px;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<h1>🏆 해커스 지점별 폐교재 수거 대항전</h1>
+<p>가장 많은 교재를 모은 지점은 어디일까요?</p>
+
+<div class="map-container">
+<svg viewBox="0 0 800 1000">
+
+  <!-- 단순화된 대한민국 지도 배경 -->
+  <path d="M400,50 C550,120 600,300 560,500 C520,700 450,900 350,920 C250,940 200,700 230,500 C260,300 300,150 400,50 Z"
+        fill="#e0f2e9" stroke="#8bc34a" stroke-width="3"/>
+
+  <!-- ===== 지점들 ===== -->
+
+  <!-- 강남점 (2등) -->
+  <g class="branch" transform="translate(420,520)">
+    <text y="-60" font-size="40">🌲</text>
+    <text y="-25" font-size="20">📚</text>
+    <text y="10" class="label">강남점</text>
+    <text y="28" class="amount">420kg</text>
+  </g>
+
+  <!-- 부산점 (1등) -->
+  <g class="branch" transform="translate(480,780)">
+    <text y="-85" font-size="60">🌲</text>
+    <text y="-40" font-size="24">📚📚</text>
+    <text y="-105" class="crown">👑</text>
+    <text y="10" class="label">부산점</text>
+    <text y="28" class="amount">990kg</text>
+  </g>
+
+  <!-- 대구점 -->
+  <g class="branch" transform="translate(460,700)">
+    <text y="-50" font-size="32">🌲</text>
+    <text y="-20" font-size="18">📚</text>
+    <text y="10" class="label">대구점</text>
+    <text y="28" class="amount">310kg</text>
+  </g>
+
+  <!-- 홍대점 -->
+  <g class="branch" transform="translate(380,480)">
+    <text y="-45" font-size="30">🌲</text>
+    <text y="-18" font-size="16">📚</text>
+    <text y="10" class="label">홍대점</text>
+    <text y="28" class="amount">280kg</text>
+  </g>
+
+</svg>
+</div>
+
+</body>
+</html>

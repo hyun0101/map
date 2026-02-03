@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>해커스 폐교재 수거 대항전</title>
+<style>
+  body {
+    margin: 0;
+    font-family: "Pretendard", sans-serif;
+    background: #f3f8f3;
+    text-align: center;
+  }
+
+  h1 { margin: 20px 0 5px; }
+  p { margin-bottom: 20px; color: #555; }
+
+  .map-wrap {
+    width: 900px;
+    margin: 0 auto 50px;
+  }
+
+  svg { width: 100%; }
+
+  .korea-map {
+    fill: #eef3e6;
+    stroke: #8fb9b1;
+    stroke-width: 2;
+  }
+
+  .region-line {
+    fill: none;
+    stroke: #9fc9c0;
+    stroke-width: 1;
+  }
+
+  .branch {
+    cursor: pointer;
+    transition: transform .2s ease;
+  }
+  .branch:hover { transform: scale(1.1); }
+
+  .label {
+    font-size: 13px;
+    font-weight: bold;
+    fill: #333;
+    text-anchor: middle;
+  }
+
+  .amount {
+    font-size: 12px;
+    fill: #2e7d32;
+    text-anchor: middle;
+  }
+
+  .crown {
+    font-size: 26px;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<h1>🏆 해커스 지점별 폐교재

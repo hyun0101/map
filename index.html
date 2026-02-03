@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>해커스 실버 웨이트 대항전</title>
+<title>해커스 실버 웨이트 지점 대항전</title>
 
 <style>
 body {
@@ -20,14 +20,19 @@ h1 { margin: 20px 10px 5px; font-size: 22px; }
   position: relative;
   max-width: 900px;
   margin: 20px auto;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/South_Korea_location_map.svg/800px-South_Korea_location_map.svg.png') no-repeat center/contain;
-  height: 600px;
+  height: 650px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/6/6e/South_Korea_blank_map.svg') no-repeat center;
+  background-size: contain;
 }
 
 .branch {
   position: absolute;
   transform: translate(-50%, -50%);
   text-align: center;
+  transition: transform 0.2s ease;
+}
+.branch:hover {
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .icon {
@@ -41,7 +46,7 @@ h1 { margin: 20px 10px 5px; font-size: 22px; }
   border-radius: 12px;
   font-size: 12px;
   margin-top: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
   white-space: nowrap;
 }
 
@@ -52,11 +57,11 @@ h1 { margin: 20px 10px 5px; font-size: 22px; }
 }
 
 .ranking {
-  max-width: 400px;
+  max-width: 420px;
   margin: 30px auto;
   background: white;
-  padding: 15px;
-  border-radius: 16px;
+  padding: 18px;
+  border-radius: 18px;
   box-shadow: 0 5px 12px rgba(0,0,0,0.08);
   text-align: left;
 }
@@ -68,7 +73,7 @@ h1 { margin: 20px 10px 5px; font-size: 22px; }
 <body>
 
 <h1>📚🌲 해커스 실버 웨이트 지점 대항전</h1>
-<div class="subtitle">폐교재가 모여 숲을 만듭니다</div>
+<div class="subtitle">폐교재가 모여 한반도에 숲을 만듭니다</div>
 
 <div class="map-container" id="map"></div>
 
@@ -79,27 +84,26 @@ h1 { margin: 20px 10px 5px; font-size: 22px; }
 
 <script>
 const branches = [
-  { name: "강남 해커스", x: 62, y: 58, weight: 128.5 },
-  { name: "종로 해커스", x: 60, y: 52, weight: 96.2 },
-  { name: "신촌 해커스", x: 57, y: 50, weight: 143.8 },
+  { name: "강남 해커스", x: 63, y: 55, weight: 128.5 },
+  { name: "종로 해커스", x: 61, y: 50, weight: 96.2 },
+  { name: "신촌 해커스", x: 58, y: 48, weight: 143.8 },
   { name: "부산 해커스", x: 78, y: 78, weight: 88.4 }
 ];
 
-// 🔥 무게순 정렬해서 1등 찾기
+// 무게순 정렬 → 1등 찾기
 branches.sort((a, b) => b.weight - a.weight);
 const topBranchName = branches[0].name;
 
 function getTreeIcons(weight) {
   return "🌲".repeat(Math.max(1, Math.floor(weight / 40)));
 }
-
 function getBookIcons(weight) {
   return "📚".repeat(Math.max(1, Math.floor(weight / 30)));
 }
 
 const map = document.getElementById("map");
 
-// 지도 표시
+// 지도 위 지점 표시
 branches.forEach(branch => {
   const div = document.createElement("div");
   div.className = "branch";

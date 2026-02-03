@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>해커스 지점별 폐교재 수거 랭킹</title>
+
+<style>
+body {
+  font-family: 'Pretendard', sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 30px;
+  font-size: 28px;
+}
+
+.map-container {
+  position: relative;
+  max-width: 900px;
+  margin: 30px auto;
+  height: 700px;
+}
+
+/* 🗺️ 한반도 지도 이미지 */
+.korea-map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.35;
+  left: 0;
+  top: 0;
+}
+
+/* 📍 지점 아이콘 */
+.branch {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  text-align: center;
+}
+
+.branch .tree {
+  font-size: 32px;
+}
+
+.branch .crown {
+  font-size: 20px;
+  display: block;
+  margin-bottom: -5px;
+}
+
+.branch .label {
+  font-size: 13px;
+  background: white;
+  padding: 4px 6px;
+  border-radius: 8px;
+  margin-top: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+
+/* 🏆 1등 지점 강조 */
+.first-place .tree {
+  font-size: 40px;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-6px);}
+}
+
+.info-box {
+  margin-top: 20px;
+  font-size: 15px;
+  color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 해커스 지점별 폐교재 수거 대항전 🌲</h1>
+<p>지점별 수거량을 소나무 보호 수치로 환산했어요!</p>
+
+<div class="map-container" id="map">
+  <!-- 지도 이미지 -->
+  <img src="images/korea-map.png" class="korea-map" alt="한반도 지도">
+</div>
+
+<div class="info-box">
+  🌲 소나무 1그루 보호 ≈ 폐종이 10kg 재활용<br>
+  👑 왕관이 있는 지점이 현재 1위입니다!
+</div>
+
+<script>
+// 📊 지점 데이터 (좌표는 지도에 맞게 조정 가능)
+const branches = [
+  { name: "강남 해커스", x: 63, y: 55, weight: 128.5 },
+  { name: "신촌 해커스", x: 58, y: 38, weight: 95.2 },
+  { name: "종로 해커스", x: 60, y: 42, weight: 110.0 },
+  { name: "부산 해커스", x: 78, y: 82, weight: 140.3 },
+  { name: "대구 해커스", x: 72, y: 70, weight: 88.7 }
+];
+
+// 🌲 환산 함수
+function calculateTrees(weight) {
+  return (weight / 10).toFixed(1);
+}
+
+// 🏆 1등 지점 찾기
+const topBranch = branches.reduce((prev, current) =>
+  prev.weight > current.weight ? prev : current
+);
+
+const map = document.getElementById("map");
+
+branches.forEach(branch => {
+  const div = document.createElement("div");
+  div.className = "branch";
+  if (branch.name === topBranch.name) div.classList.add("first-place");
+
+  div.style.left = branch.x + "%";
+  div.style.top = branch.y + "%";
+
+  const trees = calculateTrees(branch.weight);
+
+  div.innerHTML = `
+    ${branch.name === topBranch.name ? '<span class="crown">👑</span>' : ''}
+    <div class="tree">🌲</div>
+    <div class="label">
+      ${branch.name}<br>
+      📚 ${branch.weight}kg<br>
+      🌲 ${trees}그루 보호
+    </div>
+  `;
+
+  map.appendChild(div);
+});
+</script>
+
+</body>
+</html>
